@@ -86,3 +86,15 @@ test('stats producer shouldn\'t emit anything if never started', {timeout: 5000}
     t.end()
   }, 4000)
 })
+
+test('stats handles optional emitterId', (t) => {
+    const statsProducer = new StatsProducer({emitterId: 'dummyId'})
+    t.equal(statsProducer.getId(), 'dummyId')
+    t.end()
+})
+
+test('stats handles optional tags', (t) => {
+    const statsProducer = new StatsProducer({tags: ['helloMe']})
+    t.equal(statsProducer.getTags()[0], 'helloMe')
+    t.end()
+})

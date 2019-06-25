@@ -46,12 +46,15 @@ Returns an event emitter which emits a `stats` event containing useful stats.
   - eventLoopSampleInterval: the interval at which the eventLoop should be sampled, defaults to 500.
   - eventLoopLimit: the maximum amount of delay that is tolerated before overLimit is detected as true, defaults to 50.
   - tags: an array of user defined strings to tag your stats with
+  - emitterId: custom id to identify emmiter. If not provided it will use hyperid() to generate it's unique id
 
 The StatsProducer event emitter which is returned has the following methods.
 
 `statsProducer.start()` - starts the stats producer listening and producing stats.
 
 `statsProducer.stop()` - stops producing stats.
+
+`statsProducer.getId()` - returns current emitter ID
 
 ### Stat object
 
