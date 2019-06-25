@@ -39,7 +39,7 @@ function StatsProducer (optsArg) {
   this._loopbench = undefined
   this._gcProfiler = gcProfiler
   this._gcs = []
-  this._statsEmitterID = hyperid()
+  this._statsEmitterID = opts.emitterId || hyperid()
 
   this._emitInterval = reInterval(() => this.emit('stats', this._regenerateStats()), this._opts.sampleInterval * 1000)
   this._emitInterval.clear()
@@ -79,6 +79,21 @@ function StatsProducer (optsArg) {
 }
 
 inherits(StatsProducer, EventEmitter)
+
+/**
+ * Exposes internal emitter ID
+ */
+StatsProducer.prototype.getId = function () {
+    return this._statsEmitterID;
+}
+
+/**
+ * Exposes defined tags. May be undefined if not set.
+ */
+StatsProducer.prototype.getTags = function () {
+    return this._opts.tags;
+}
+
 
 StatsProducer.prototype.start = function () {
   if (this._probing) return
